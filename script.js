@@ -6,22 +6,28 @@
 // 2. the Browser's fetch() function
 // 3. Using the axios http clinet library
 //variables 
-const URL = "http://www.omdbapi.com/?apikey=a71b148a&t=Die+Hard";
+const URL = "http://www.omdbapi.com/?apikey=a71b148a&t=";
 
-// element references 
+// element references jQuery variables
 const $title = $('#title');
 const $year = $('#year');
 const $rating = $('#rating');
+const $form = $('form');
+const $input = $('input[type="text"]');
 
 
 //event listerners 
-
+$form.on('submit',handleGetData); 
 
 // functions
 
-function handleGetData(){
+function handleGetData(event){
 
-    $.ajax(URL).then(function(data) {
+event.preventDefault()
+const userInput =$input.val();
+
+
+    $.ajax(URL+userInput).then(function(data) {
         console.log('movie data is ready')
          console.log(data)
         $title.text(data.Title)
